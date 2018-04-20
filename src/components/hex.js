@@ -1,7 +1,7 @@
 // hex
 export default {
   init: function(api) {
-    const template = `<input type="text" class="${api.namespace}-hex" />`;
+    const template = `<input type="text" class="${api.namespace}-hex" /><button> OK </button>`;
     this.$hex = $(template).appendTo(api.$dropdown);
 
     this.$hex.on('change', function() {

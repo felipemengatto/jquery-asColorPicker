@@ -22,6 +22,17 @@ export default {
     hex: true,
     buttons: true
   },
+  'flat-design': {
+    trigger: true,
+    clear: true,
+    preview: true,
+    hex: true,
+    palettes: true,
+    saturation: true,
+    hue: true,
+    alpha: true,
+    buttons: true
+  },
   'gradient': {
     trigger: true,
     clear: true,

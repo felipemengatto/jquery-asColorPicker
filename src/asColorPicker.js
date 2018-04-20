@@ -44,6 +44,7 @@ class AsColorPicker {
     this.initialed = false;
     this.originValue = this.element.value;
     this.isEmpty = false;
+    this.expecificLayout = '';
 
     createId(this);
 
@@ -133,18 +134,66 @@ class AsColorPicker {
     this.$dropdown.data(NAMESPACE, this);
 
     let component;
+    let dropdownDiv = this.$dropdown;
     $.each(this.components, (key, options) => {
+
       if (options === true) {
         options = {};
       }
       if (this.options[key] !== undefined) {
         options = $.extend(true, {}, options, this.options[key]);
       }
+
+      if (this.options.mode === 'flat-design') {
+
+        if (key === 'preview' || key === 'hex') {
+
+          var existDiv = dropdownDiv.find(`.flat-design-preview`);
+
+          if (existDiv.length > 0) {
+            this.$dropdown = existDiv;
+          } else {
+            this.$dropdown = $('<div/>');
+            this.$dropdown.addClass(`flat-design-preview`);
+          }
+
+          dropdownDiv.append(this.$dropdown);
+        }
+
+        if (key === 'palettes') {
+          this.$dropdown = $('<div/>');
+          this.$dropdown.addClass(`flat-design-${key}`);
+          dropdownDiv.append('<h6> Cores Recentes: </h6>');
+          dropdownDiv.append(this.$dropdown);
+        }
+
+        if (key === 'saturation' || key === 'hue' || key === 'alpha') {
+
+          var existDiv = dropdownDiv.find(`.flat-design-options`);
+
+          if (existDiv.length > 0) {
+            this.$dropdown = existDiv;
+          } else {
+            this.$dropdown = $('<div/>');
+            dropdownDiv.append('<h6> Selecione uma nova cor: </h6>');
+            this.$dropdown.addClass(`flat-design-options`);
+          }
+
+          dropdownDiv.append(this.$dropdown);
+        }
+
+      }
+
       if (Object.hasOwnProperty.call(this._components, key)) {
         component = this._components[key];
         component.init(this, options);
       }
+
+      this.$dropdown = dropdownDiv;
+
     });
+      
+    this.$dropdown.addClass(this.options.mode);
 
     this._trigger('create');
   }
