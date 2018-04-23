@@ -8,12 +8,7 @@ export default {
   keyboard: false,
   color: {
     format: false,
-    alphaConvert: { // or false will disable convert
-      'RGB': 'RGBA',
-      'HSL': 'HSLA',
-      'HEX': 'RGBA',
-      'NAMESPACE': 'RGBA',
-    },
+    alphaConvert: false,
     shortenHex: false,
     hexUseName: false,
     reduceAlpha: true,
