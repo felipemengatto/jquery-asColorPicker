@@ -1,5 +1,5 @@
 /**
-* asColorPicker-flat v0.4.12
+* asColorPicker-flat v0.4.13
 * https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
 * Copyright (c) undefined
@@ -72,13 +72,7 @@
     keyboard: false,
     color: {
       format: false,
-      alphaConvert: {
-        // or false will disable convert
-        RGB: 'RGBA',
-        HSL: 'HSLA',
-        HEX: 'RGBA',
-        NAMESPACE: 'RGBA'
-      },
+      alphaConvert: false,
       shortenHex: false,
       hexUseName: false,
       reduceAlpha: true,
@@ -1145,7 +1139,7 @@
 
       for (var i in colors) {
         if (Object.hasOwnProperty.call(colors, i)) {
-          this.colors.push(asColor.val(colors[i]).toRGBA());
+          this.colors.unshift(asColor.val(colors[i]).toRGBA());
         }
       }
 
@@ -1174,14 +1168,14 @@
         var rgba = color.toRGBA();
         if ($.inArray(rgba, that.colors) === -1) {
           if (that.colors.length >= that.options.max) {
-            that.colors.shift();
+            that.colors.pop();
             that.$palettes
               .find('li')
               .eq(0)
               .remove();
           }
 
-          that.colors.push(rgba);
+          that.colors.unshift(rgba);
 
           that.$palettes.append(that.options.item(api.namespace, color));
 
@@ -2550,7 +2544,7 @@
   });
 
   var info$1 = {
-    version: '0.4.12'
+    version: '0.4.13'
   };
 
   var NAMESPACE = 'asColorPicker';

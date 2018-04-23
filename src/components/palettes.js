@@ -43,7 +43,7 @@ export default {
 
     for (const i in colors) {
       if(Object.hasOwnProperty.call(colors, i)){
-        this.colors.push(asColor.val(colors[i]).toRGBA());
+        this.colors.unshift(asColor.val(colors[i]).toRGBA());
       }
     }
 
@@ -70,11 +70,11 @@ export default {
       const rgba = color.toRGBA();
       if ($.inArray(rgba, that.colors) === -1) {
         if (that.colors.length >= that.options.max) {
-          that.colors.shift();
+          that.colors.pop();
           that.$palettes.find('li').eq(0).remove();
         }
 
-        that.colors.push(rgba);
+        that.colors.unshift(rgba);
 
         that.$palettes.append(that.options.item(api.namespace, color));
 
