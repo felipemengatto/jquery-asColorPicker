@@ -1,17 +1,13 @@
 {
-  "name": "jquery-asColorPicker-flat",
+  "name": "jquery-ascolorpicker-flat",
   "title": "asColorPicker-flat",
   "description": "A jquery plugin that convent input into color picker.",
   "version": "0.4.8",
   "homepage": "https://github.com/felipemengatto/jquery-asColorPicker-flat",
-  "author": {
-    "name": "amazingSurge",
-    "email": "amazingSurge@gmail.com",
-    "url": "amazingSurge.com"
-  },
+  "author": "amazingSurge <amazingSurge@gmail.com> (amazingSurge.com)",
   "repository": {
     "type": "git",
-    "url": "git@github.com:amazingSurge/jquery-asColorPicker.git"
+    "url": "git+ssh://git@github.com/amazingSurge/jquery-asColorPicker.git"
   },
   "keywords": [
     "jquery",
@@ -21,7 +17,9 @@
     "es6",
     "Scrollbar"
   ],
-  "bugs": "https://github.com/felipemengatto/jquery-asColorPicker-flat/issues",
+  "bugs": {
+    "url": "https://github.com/felipemengatto/jquery-asColorPicker-flat/issues"
+  },
   "licenses": [
     {
       "type": "LGPL-3.0",
@@ -125,5 +123,8 @@
     "jquery-asColor": "^0.3.4",
     "jquery-asGradient": "^0.3.2",
     "npm": "^5.8.0"
+  },
+  "directories": {
+    "example": "examples"
   }
 }
