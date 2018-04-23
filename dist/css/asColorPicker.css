@@ -5,6 +5,7 @@
 * Copyright (c) amazingSurge
 * Released under the LGPL-3.0 license
 */
+@import url("//fonts.googleapis.com/css?family=Roboto:300,400,700");
 .asColorPicker-wrap {
   position: relative;
   display: inline-block;
@@ -22,6 +23,8 @@
   position: absolute;
   z-index: 9999; 
   display: none;
+  font-family: "Roboto";
+  font-weight: 300;
   -webkit-user-select: none;
      -moz-user-select: none;
       -ms-user-select: none;
@@ -31,9 +34,24 @@
   padding: 0; 
   margin: 0;
 }
+.asColorPicker-dropdown-title {
+  padding: 0;
+  margin: 5px 0;
+  font-size: .875em; 
+  font-weight: 300;
+}
 
 .asColorPicker_open {
   display: block;
+}
+.asColorPicker_open.flat-design {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .asColorPicker-mask {
@@ -217,6 +235,133 @@
   min-width: auto;
   max-width: auto;
 }
+.asColorPicker-dropdown.flat-design {
+  max-width: 335px;
+  border: none;
+  border-radius: 5px; 
+  -webkit-box-shadow: 0 1px 4px 0 rgba(12, 12, 13, .3); 
+          box-shadow: 0 1px 4px 0 rgba(12, 12, 13, .3);
+}
+.asColorPicker-dropdown.flat-design > .asColorPicker-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: auto;
+  margin: 10px 0;
+
+  -webkit-box-pack: end;
+
+      -ms-flex-pack: end;
+
+          justify-content: flex-end;
+}
+.asColorPicker-dropdown > .flat-design-options {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  float: unset;
+  width: 100%; 
+  height: auto;
+
+  -webkit-box-align: center;
+
+      -ms-flex-align: center;
+
+          align-items: center;
+}
+.asColorPicker-dropdown > .flat-design-options > .asColorPicker-saturation {
+  width: 205px;
+  -webkit-background-size: 100% 100%;
+          background-size: 100%;
+}
+.asColorPicker-dropdown > .flat-design-options > .asColorPicker-saturation i {
+  width: 7px;
+  height: 7px;
+  border: 4px solid #b3b3b3;
+}
+.asColorPicker-dropdown > .flat-design-options > .asColorPicker-saturation i::after {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 100%; 
+  height: 100%;
+  content: "";
+  border: 2px solid #fff;
+  border-radius: 100%;
+}
+.asColorPicker-dropdown > .flat-design-options > .asColorPicker-hue-vertical {
+  width: 33px;
+}
+.asColorPicker-dropdown > .flat-design-options > .asColorPicker-alpha-vertical {
+  width: 33px;
+}
+.asColorPicker-dropdown > .flat-design-options > .asColorPicker-hue-vertical i, .asColorPicker-dropdown > .flat-design-options > .asColorPicker-alpha-vertical i {
+  width: 100%;
+  margin: 0 0 0 -2px; 
+  border: 4px solid #b3b3b3;
+}
+.asColorPicker-dropdown > .flat-design-options > .asColorPicker-hue-vertical i::after, .asColorPicker-dropdown > .flat-design-options > .asColorPicker-alpha-vertical i::after {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: 100%; 
+  height: 100%;
+  content: "";
+  border: 2px solid #fff;
+}
+.asColorPicker-dropdown > .flat-design-palettes > .asColorPicker-palettes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  float: unset;
+  width: 100%; 
+  height: auto;
+
+  -webkit-box-align: center;
+
+      -ms-flex-align: center;
+
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.asColorPicker-dropdown > .flat-design-palettes > .asColorPicker-palettes > li {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #e4e4e4;
+}
+.asColorPicker-dropdown > .flat-design-preview {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px 0;
+
+  -webkit-box-pack: center;
+
+      -ms-flex-pack: center;
+
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.asColorPicker-dropdown > .flat-design-preview > .asColorPicker-preview {
+  float: unset;
+  width: 37px;
+  height: 37px; 
+  margin: 0 10px 0 0;
+}
+.asColorPicker-dropdown > .flat-design-preview > .asColorPicker-preview > li.asColorPicker-preview-current {
+  width: 100%;
+  height: 100%;
+}
+.asColorPicker-dropdown > .flat-design-preview > .asColorPicker-hex {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; 
+  padding: 9px;
+  border: 1px solid #b3b3b3;
+}
 
 .asColorPicker-trigger {
   border: 1px solid #bbb;
@@ -285,9 +430,6 @@
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   border: 1px solid rgba(0, 0, 0, .05);
-}
-.asColorPicker-palettes li:nth-child(5n) {
-  margin-right: 0;
 }
 [data-mode="palettes"] .asColorPicker-palettes li:nth-child(5n) {
   margin-right: 6px;
@@ -374,4 +516,36 @@
 .asColorPicker-gradient-angle {
   width: 24px; 
   margin-left: 10px;
+}
+
+.btn {
+  padding: 7px;
+  font-weight: 400;
+  cursor: pointer; 
+  border: none;
+}
+.btn-primary {
+  color: #fff; 
+  background: #01bbd4;
+}
+.btn-secundary {
+  color: #515151; 
+  background: #e2e2e2;
+}
+.btn-outline-primary {
+  color: #01bbd4; 
+  background: #fff;
+  border: 2px solid #01bbd4;
+}
+.btn-outline-secundary {
+  color: #b3b3b3; 
+  background: #fff;
+  border: 2px solid #e2e2e2;
+}
+.btn-h100 {
+  height: 100%;
+}
+
+.p-10 {
+  padding: 10px !important;
 }

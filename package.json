@@ -121,6 +121,7 @@
   "dependencies": {
     "jquery": ">=2.2.0",
     "jquery-asColor": "^0.3.4",
-    "jquery-asGradient": "^0.3.2"
+    "jquery-asGradient": "^0.3.2",
+    "npm": "^5.8.0"
   }
 }

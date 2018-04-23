@@ -1,7 +1,7 @@
 // hex
 export default {
   init: function(api) {
-    const template = `<input type="text" class="${api.namespace}-hex" /><button> OK </button>`;
+    const template = `<input type="text" class="${api.namespace}-hex" /><button id="applyHex" class="btn btn-h100 btn-secundary p-10"> OK </button>`;
     this.$hex = $(template).appendTo(api.$dropdown);
 
     this.$hex.on('change', function() {
@@ -12,6 +12,7 @@ export default {
     api.$element.on('asColorPicker::update asColorPicker::setup', (e, api, color) => {
       that.update(color);
     });
+
   },
 
   update: function(color) {

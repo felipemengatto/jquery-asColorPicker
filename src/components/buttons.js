@@ -1,7 +1,7 @@
 // buttons
 export default {
   defaults: {
-    apply: false,
+    apply: true,
     cancel: true,
     applyText: null,
     cancelText: null,
@@ -9,10 +9,10 @@ export default {
       return `<div class="${namespace}-buttons"></div>`;
     },
     applyTemplate(namespace) {
-      return `<a href="#" alt="${this.options.applyText}" class="${namespace}-buttons-apply">${this.options.applyText}</a>`;
+      return `<a class="btn btn-outline-primary" href="#" alt="${this.options.applyText}" class="${namespace}-buttons-apply">${this.options.applyText}</a>`;
     },
     cancelTemplate(namespace) {
-      return `<a href="#" alt="${this.options.cancelText}" class="${namespace}-buttons-apply">${this.options.cancelText}</a>`;
+      return `<a class="btn btn-outline-secundary" href="#" alt="${this.options.cancelText}" class="${namespace}-buttons-apply">${this.options.cancelText}</a>`;
     }
   },
 
@@ -26,16 +26,16 @@ export default {
     this.$buttons = $(this.options.template.call(this, api.namespace)).appendTo(api.$dropdown);
 
     api.$element.on('asColorPicker::firstOpen', () => {
-      if (that.options.apply) {
-        that.$apply = $(that.options.applyTemplate.call(that, api.namespace)).appendTo(that.$buttons).on('click', () => {
-          api.apply();
-          return false;
-        });
-      }
-
       if (that.options.cancel) {
         that.$cancel = $(that.options.cancelTemplate.call(that, api.namespace)).appendTo(that.$buttons).on('click', () => {
           api.cancel();
+          return false;
+        });
+      }
+      
+      if (that.options.apply) {
+        that.$apply = $(that.options.applyTemplate.call(that, api.namespace)).appendTo(that.$buttons).on('click', () => {
+          api.apply();
           return false;
         });
       }

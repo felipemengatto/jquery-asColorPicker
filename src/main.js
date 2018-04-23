@@ -11,6 +11,7 @@ import "./i18n/ja";
 import "./i18n/ru";
 import "./i18n/sv";
 import "./i18n/tr";
+import "./i18n/pt-br";
 
 import info from './info';
 

@@ -13,7 +13,7 @@ var DEFAULTS = {
   namespace: 'asColorPicker',
   readonly: false,
   skin: null,
-  lang: 'en',
+  lang: 'pt-br',
   hideInput: false,
   hideFireChange: true,
   keyboard: false,
@@ -65,6 +65,17 @@ var MODES = {
     hex: true,
     buttons: true
   },
+  'flat-design': {
+    trigger: true,
+    clear: true,
+    preview: true,
+    hex: true,
+    palettes: true,
+    saturation: true,
+    hue: true,
+    alpha: true,
+    buttons: true
+  },
   'gradient': {
     trigger: true,
     clear: true,
@@ -77,6 +88,57 @@ var MODES = {
     gradient: true
   }
 };
+
+class Layouts {
+
+  constructor() {
+  }
+
+  static createByModesName(mode, nameItem, newDropdown, currentDropdown) {
+
+    if (mode === 'flat-design') {
+
+      if (nameItem === 'preview' || nameItem === 'hex') {
+
+        var existDiv = currentDropdown.find(`.flat-design-preview`);
+
+        if (existDiv.length > 0) {
+          newDropdown = existDiv;
+        } else {
+          newDropdown = $$1('<div/>');
+          newDropdown.addClass(`flat-design-preview`);
+        }
+
+        currentDropdown.append(newDropdown);
+      }
+
+      if (nameItem === 'palettes') {
+        newDropdown = $$1('<div/>');
+        newDropdown.addClass(`flat-design-${nameItem}`);
+        currentDropdown.append('<h5 class="asColorPicker-dropdown-title"> Cores Recentes: </h5>');
+        currentDropdown.append(newDropdown);
+      }
+
+      if (nameItem === 'saturation' || nameItem === 'hue' || nameItem === 'alpha') {
+
+        var existDiv = currentDropdown.find(`.flat-design-options`);
+
+        if (existDiv.length > 0) {
+          newDropdown = existDiv;
+        } else {
+          newDropdown = $$1('<div/>');
+          currentDropdown.append('<h5 class="asColorPicker-dropdown-title"> Selecione uma nova cor: </h5>');
+          newDropdown.addClass(`flat-design-options`);
+        }
+
+        currentDropdown.append(newDropdown);
+      }
+
+    }
+
+    return newDropdown;
+  }
+}
 
 // alpha
 var alpha = {
@@ -281,7 +343,7 @@ var alpha = {
 // hex
 var hex = {
   init: function(api) {
-    const template = `<input type="text" class="${api.namespace}-hex" />`;
+    const template = `<input type="text" class="${api.namespace}-hex" /><button id="applyHex" class="btn btn-h100 btn-secundary p-10"> OK </button>`;
     this.$hex = $(template).appendTo(api.$dropdown);
 
     this.$hex.on('change', function() {
@@ -292,6 +354,7 @@ var hex = {
     api.$element.on('asColorPicker::update asColorPicker::setup', (e, api, color) => {
       that.update(color);
     });
+
   },
 
   update: function(color) {
@@ -697,7 +760,7 @@ var saturation = {
 // buttons
 var buttons = {
   defaults: {
-    apply: false,
+    apply: true,
     cancel: true,
     applyText: null,
     cancelText: null,
@@ -705,10 +768,10 @@ var buttons = {
       return `<div class="${namespace}-buttons"></div>`;
     },
     applyTemplate(namespace) {
-      return `<a href="#" alt="${this.options.applyText}" class="${namespace}-buttons-apply">${this.options.applyText}</a>`;
+      return `<a class="btn btn-outline-primary" href="#" alt="${this.options.applyText}" class="${namespace}-buttons-apply">${this.options.applyText}</a>`;
     },
     cancelTemplate(namespace) {
-      return `<a href="#" alt="${this.options.cancelText}" class="${namespace}-buttons-apply">${this.options.cancelText}</a>`;
+      return `<a class="btn btn-outline-secundary" href="#" alt="${this.options.cancelText}" class="${namespace}-buttons-apply">${this.options.cancelText}</a>`;
     }
   },
 
@@ -722,16 +785,16 @@ var buttons = {
     this.$buttons = $(this.options.template.call(this, api.namespace)).appendTo(api.$dropdown);
 
     api.$element.on('asColorPicker::firstOpen', () => {
-      if (that.options.apply) {
-        that.$apply = $(that.options.applyTemplate.call(that, api.namespace)).appendTo(that.$buttons).on('click', () => {
-          api.apply();
-          return false;
-        });
-      }
-
       if (that.options.cancel) {
         that.$cancel = $(that.options.cancelTemplate.call(that, api.namespace)).appendTo(that.$buttons).on('click', () => {
           api.cancel();
+          return false;
+        });
+      }
+      
+      if (that.options.apply) {
+        that.$apply = $(that.options.applyTemplate.call(that, api.namespace)).appendTo(that.$buttons).on('click', () => {
+          api.apply();
           return false;
         });
       }
@@ -968,7 +1031,7 @@ var palettes = {
 var preview = {
   defaults: {
     template(namespace) {
-      return `<ul class="${namespace}-preview"><li class="${namespace}-preview-current"><span /></li><li class="${namespace}-preview-previous"><span /></li></ul>`;
+      return `<ul class="${namespace}-preview"><li class="${namespace}-preview-current"><span /></li></ul>`;
     }
   },
 
@@ -988,7 +1051,6 @@ var preview = {
 
     api.$element.on('asColorPicker::setup', (e, api, color) => {
       that.updateCurrent(color);
-      that.updatePreview(color);
     });
     api.$element.on('asColorPicker::update', (e, api, color) => {
       that.updateCurrent(color);
@@ -997,16 +1059,6 @@ var preview = {
 
   updateCurrent: function(color) {
     this.$current.css('backgroundColor', color.toRGBA());
-  },
-
-  updatePreview: function(color) {
-    this.$previous.css('backgroundColor', color.toRGBA());
-    this.$previous.data('color', {
-      r: color.value.r,
-      g: color.value.g,
-      b: color.value.b,
-      a: color.value.a
-    });
   }
 };
 
@@ -1665,6 +1717,7 @@ class AsColorPicker {
     this.initialed = false;
     this.originValue = this.element.value;
     this.isEmpty = false;
+    this.expecificLayout = '';
 
     createId(this);
 
@@ -1754,18 +1807,29 @@ class AsColorPicker {
     this.$dropdown.data(NAMESPACE$1, this);
 
     let component;
+    let currentDropdown = this.$dropdown;
     $$1.each(this.components, (key, options) => {
+
       if (options === true) {
         options = {};
       }
+
       if (this.options[key] !== undefined) {
         options = $$1.extend(true, {}, options, this.options[key]);
       }
+
+      this.$dropdown = Layouts.createByModesName(this.options.mode, key, this.$dropdown, currentDropdown);
+
       if (Object.hasOwnProperty.call(this._components, key)) {
         component = this._components[key];
         component.init(this, options);
       }
+
+      this.$dropdown = currentDropdown;
+
     });
+      
+    this.$dropdown.addClass(this.options.mode);
 
     this._trigger('create');
   }
@@ -2097,6 +2161,12 @@ AsColorPicker.setLocalization('sv', {
 AsColorPicker.setLocalization('tr', {
   cancelText: "Avbryt",
   applyText: "Välj"
+});
+
+// Brazil (pt-br) localization
+AsColorPicker.setLocalization('pt-br', {
+  cancelText: "Cancelar",
+  applyText: "Concluído"
 });
 
 var info$1 = {

@@ -66,7 +66,7 @@
     namespace: 'asColorPicker',
     readonly: false,
     skin: null,
-    lang: 'en',
+    lang: 'pt-br',
     hideInput: false,
     hideFireChange: true,
     keyboard: false,
@@ -119,6 +119,17 @@
       hex: true,
       buttons: true
     },
+    'flat-design': {
+      trigger: true,
+      clear: true,
+      preview: true,
+      hex: true,
+      palettes: true,
+      saturation: true,
+      hue: true,
+      alpha: true,
+      buttons: true
+    },
     gradient: {
       trigger: true,
       clear: true,
@@ -131,6 +142,72 @@
       gradient: true
     }
   };
+
+  var Layouts = (function() {
+    function Layouts() {
+      _classCallCheck(this, Layouts);
+    }
+
+    _createClass(Layouts, null, [
+      {
+        key: 'createByModesName',
+        value: function createByModesName(
+          mode,
+          nameItem,
+          newDropdown,
+          currentDropdown
+        ) {
+          if (mode === 'flat-design') {
+            if (nameItem === 'preview' || nameItem === 'hex') {
+              var existDiv = currentDropdown.find('.flat-design-preview');
+
+              if (existDiv.length > 0) {
+                newDropdown = existDiv;
+              } else {
+                newDropdown = (0, _jquery2.default)('<div/>');
+                newDropdown.addClass('flat-design-preview');
+              }
+
+              currentDropdown.append(newDropdown);
+            }
+
+            if (nameItem === 'palettes') {
+              newDropdown = (0, _jquery2.default)('<div/>');
+              newDropdown.addClass('flat-design-' + nameItem);
+              currentDropdown.append(
+                '<h5 class="asColorPicker-dropdown-title"> Cores Recentes: </h5>'
+              );
+              currentDropdown.append(newDropdown);
+            }
+
+            if (
+              nameItem === 'saturation' ||
+              nameItem === 'hue' ||
+              nameItem === 'alpha'
+            ) {
+              var existDiv = currentDropdown.find('.flat-design-options');
+
+              if (existDiv.length > 0) {
+                newDropdown = existDiv;
+              } else {
+                newDropdown = (0, _jquery2.default)('<div/>');
+                currentDropdown.append(
+                  '<h5 class="asColorPicker-dropdown-title"> Selecione uma nova cor: </h5>'
+                );
+                newDropdown.addClass('flat-design-options');
+              }
+
+              currentDropdown.append(newDropdown);
+            }
+          }
+
+          return newDropdown;
+        }
+      }
+    ]);
+
+    return Layouts;
+  })();
 
   // alpha
   var alpha = {
@@ -354,7 +431,10 @@
   // hex
   var hex = {
     init: function init(api) {
-      var template = '<input type="text" class="' + api.namespace + '-hex" />';
+      var template =
+        '<input type="text" class="' +
+        api.namespace +
+        '-hex" /><button id="applyHex" class="btn btn-h100 btn-secundary p-10"> OK </button>';
       this.$hex = $(template).appendTo(api.$dropdown);
 
       this.$hex.on('change', function() {
@@ -806,7 +886,7 @@
   // buttons
   var buttons = {
     defaults: {
-      apply: false,
+      apply: true,
       cancel: true,
       applyText: null,
       cancelText: null,
@@ -815,7 +895,7 @@
       },
       applyTemplate: function applyTemplate(namespace) {
         return (
-          '<a href="#" alt="' +
+          '<a class="btn btn-outline-primary" href="#" alt="' +
           this.options.applyText +
           '" class="' +
           namespace +
@@ -826,7 +906,7 @@
       },
       cancelTemplate: function cancelTemplate(namespace) {
         return (
-          '<a href="#" alt="' +
+          '<a class="btn btn-outline-secundary" href="#" alt="' +
           this.options.cancelText +
           '" class="' +
           namespace +
@@ -853,15 +933,6 @@
       ).appendTo(api.$dropdown);
 
       api.$element.on('asColorPicker::firstOpen', function() {
-        if (that.options.apply) {
-          that.$apply = $(that.options.applyTemplate.call(that, api.namespace))
-            .appendTo(that.$buttons)
-            .on('click', function() {
-              api.apply();
-              return false;
-            });
-        }
-
         if (that.options.cancel) {
           that.$cancel = $(
             that.options.cancelTemplate.call(that, api.namespace)
@@ -869,6 +940,15 @@
             .appendTo(that.$buttons)
             .on('click', function() {
               api.cancel();
+              return false;
+            });
+        }
+
+        if (that.options.apply) {
+          that.$apply = $(that.options.applyTemplate.call(that, api.namespace))
+            .appendTo(that.$buttons)
+            .on('click', function() {
+              api.apply();
               return false;
             });
         }
@@ -1135,9 +1215,7 @@
           namespace +
           '-preview"><li class="' +
           namespace +
-          '-preview-current"><span /></li><li class="' +
-          namespace +
-          '-preview-previous"><span /></li></ul>'
+          '-preview-current"><span /></li></ul>'
         );
       }
     },
@@ -1164,7 +1242,6 @@
 
       api.$element.on('asColorPicker::setup', function(e, api, color) {
         that.updateCurrent(color);
-        that.updatePreview(color);
       });
       api.$element.on('asColorPicker::update', function(e, api, color) {
         that.updateCurrent(color);
@@ -1173,16 +1250,6 @@
 
     updateCurrent: function updateCurrent(color) {
       this.$current.css('backgroundColor', color.toRGBA());
-    },
-
-    updatePreview: function updatePreview(color) {
-      this.$previous.css('backgroundColor', color.toRGBA());
-      this.$previous.data('color', {
-        r: color.value.r,
-        g: color.value.g,
-        b: color.value.b,
-        a: color.value.a
-      });
     }
   };
 
@@ -1917,6 +1984,7 @@
       this.initialed = false;
       this.originValue = this.element.value;
       this.isEmpty = false;
+      this.expecificLayout = '';
 
       createId(this);
 
@@ -2046,10 +2114,12 @@
             this.$dropdown.data(NAMESPACE$1, this);
 
             var component = void 0;
+            var currentDropdown = this.$dropdown;
             _jquery2.default.each(this.components, function(key, options) {
               if (options === true) {
                 options = {};
               }
+
               if (_this5.options[key] !== undefined) {
                 options = _jquery2.default.extend(
                   true,
@@ -2058,11 +2128,23 @@
                   _this5.options[key]
                 );
               }
+
+              _this5.$dropdown = Layouts.createByModesName(
+                _this5.options.mode,
+                key,
+                _this5.$dropdown,
+                currentDropdown
+              );
+
               if (Object.hasOwnProperty.call(_this5._components, key)) {
                 component = _this5._components[key];
                 component.init(_this5, options);
               }
+
+              _this5.$dropdown = currentDropdown;
             });
+
+            this.$dropdown.addClass(this.options.mode);
 
             this._trigger('create');
           }
@@ -2478,6 +2560,12 @@
   AsColorPicker.setLocalization('tr', {
     cancelText: 'Avbryt',
     applyText: 'Välj'
+  });
+
+  // Brazil (pt-br) localization
+  AsColorPicker.setLocalization('pt-br', {
+    cancelText: 'Cancelar',
+    applyText: 'Concluído'
   });
 
   var info$1 = {
