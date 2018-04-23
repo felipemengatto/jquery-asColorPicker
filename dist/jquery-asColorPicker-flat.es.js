@@ -1,5 +1,5 @@
 /**
-* asColorPicker v0.4.5
+* asColorPicker v0.4.7
 * https://github.com/amazingSurge/jquery-asColorPicker
 *
 * Copyright (c) amazingSurge
@@ -2160,7 +2160,7 @@ AsColorPicker.setLocalization('pt-br', {
 });
 
 var info$1 = {
-  version:'0.4.5'
+  version:'0.4.7'
 };
 
 const NAMESPACE = 'asColorPicker';

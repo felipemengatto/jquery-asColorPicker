@@ -1,5 +1,5 @@
 /**
-* asColorPicker v0.4.5
+* asColorPicker v0.4.7
 * https://github.com/amazingSurge/jquery-asColorPicker
 *
 * Copyright (c) amazingSurge
@@ -2551,7 +2551,7 @@
   });
 
   var info$1 = {
-    version: '0.4.5'
+    version: '0.4.7'
   };
 
   var NAMESPACE = 'asColorPicker';
