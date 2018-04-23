@@ -8,7 +8,7 @@ import gutil       from 'gulp-util';
 // Tasks
 import clean                     from './gulp/tasks/clean';
 import styles                    from './gulp/tasks/styles';
-import {version,bundler,scripts} from './gulp/tasks/scripts';
+import {version,bundler,scripts,concatExternalFiles} from './gulp/tasks/scripts';
 import * as lintScripts          from './gulp/tasks/lint-scripts';
 import * as lintStyles           from './gulp/tasks/lint-styles';
 import test                      from './gulp/tasks/test';
@@ -28,6 +28,7 @@ if (config.production) {
 gulp.task('version', version());
 gulp.task('bundler', bundler());
 gulp.task('scripts', scripts());
+gulp.task('concatExternalFiles', concatExternalFiles());
 gulp.task('clean', clean(config.scripts.dest));
 
 // Styles
@@ -39,7 +40,7 @@ gulp.task('images', images());
 gulp.task('clean:images', clean(config.images.dest));
 
 // Build the files
-gulp.task('build', gulp.series('clean', 'version', 'bundler', 'scripts', 'styles', 'images'));
+gulp.task('build', gulp.series('clean', 'version', 'bundler', 'scripts', 'styles', 'images', 'concatExternalFiles'));
 
 // Assets
 gulp.task('assets', assets.copy());

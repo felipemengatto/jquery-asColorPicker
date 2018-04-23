@@ -1,5 +1,5 @@
 /**
-* asColorPicker v0.4.4
+* asColorPicker v0.4.5
 * https://github.com/amazingSurge/jquery-asColorPicker
 *
 * Copyright (c) amazingSurge
@@ -19,7 +19,7 @@
       exports: {}
     };
     factory(global.jQuery, global.AsColor, global.AsGradient);
-    global.jqueryAsColorPickerEs = mod.exports;
+    global.jqueryAsColorPickerFlatEs = mod.exports;
   }
 })(this, function(_jquery, _jqueryAsColor, _jqueryAsGradient) {
   'use strict';
@@ -2547,11 +2547,11 @@
   // Brazil (pt-br) localization
   AsColorPicker.setLocalization('pt-br', {
     cancelText: 'Cancelar',
-    applyText: 'Concluído'
+    applyText: 'Concluido'
   });
 
   var info$1 = {
-    version: '0.4.4'
+    version: '0.4.5'
   };
 
   var NAMESPACE = 'asColorPicker';

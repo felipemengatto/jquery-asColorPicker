@@ -18,6 +18,7 @@ import prettier     from 'gulp-nf-prettier';
 import path         from 'path';
 import notify       from 'gulp-notify';
 import replace      from 'gulp-replace';
+import concat      from 'gulp-concat';
 
 export function bundler(src = config.scripts.src, dest = config.scripts.dest, input = config.scripts.input, files = config.scripts.files, message = 'Bundler task complete') {
   return function () {
@@ -115,6 +116,20 @@ export function scripts(src = config.scripts.src, dest = config.scripts.dest, in
       }));
   };
 }
+
+export function concatExternalFiles() {
+
+  return function () {
+     return gulp.src([
+        'node_modules/jquery-asColor/dist/jquery-asColor.min.js',
+        'node_modules/jquery-asGradient/dist/jquery-asGradient.min.js',
+        'dist/jquery-asColorPicker-flat.min.js',
+      ])
+      .pipe(concat('jquery-asColorPicker-flat.min.js'))
+      .pipe( gulp.dest('dist'));
+  };
+}
+
 
 export function version(src = config.scripts.src, file = config.scripts.version) {
   return function() {
