@@ -30,7 +30,6 @@ export default {
     palettes: true,
     saturation: true,
     hue: true,
-    alpha: false,
     buttons: true
   },
   'gradient': {

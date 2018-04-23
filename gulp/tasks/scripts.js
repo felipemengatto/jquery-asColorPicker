@@ -125,7 +125,7 @@ export function concatExternalFiles() {
         'node_modules/jquery-asGradient/dist/jquery-asGradient.min.js',
         'dist/jquery-ascolorpicker-flat.min.js',
       ])
-      .pipe(concat('jquery-asColorPicker-flat.min.js'))
+      .pipe(concat('jquery-ascolorpicker-flat.min.js'))
       .pipe( gulp.dest('dist'));
   };
 }
