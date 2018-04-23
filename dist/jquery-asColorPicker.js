@@ -67,7 +67,7 @@
     readonly: false,
     skin: null,
     lang: 'pt-br',
-    hideInput: false,
+    hideInput: true,
     hideFireChange: true,
     keyboard: false,
     color: {
@@ -2202,28 +2202,10 @@
               : this.$element.outerWidth() + this.$trigger.outerWidth();
             var pickerWidth = this.$dropdown.outerWidth(true);
             var pickerHeight = this.$dropdown.outerHeight(true);
-            var top = void 0;
-            var left = void 0;
+            var top = offset.top + height - this.$trigger.height();
+            var left = offset.left + width + this.$trigger.width() / 2;
 
-            if (
-              pickerHeight + offset.top >
-              (0, _jquery2.default)(window).height() +
-                (0, _jquery2.default)(window).scrollTop()
-            ) {
-              top = offset.top - pickerHeight;
-            } else {
-              top = offset.top + height;
-            }
-
-            if (
-              pickerWidth + offset.left >
-              (0, _jquery2.default)(window).width() +
-                (0, _jquery2.default)(window).scrollLeft()
-            ) {
-              left = offset.left - pickerWidth + width;
-            } else {
-              left = offset.left;
-            }
+            this.$dropdown.addClass(this.classes.dropdown + '-triangle-left');
 
             this.$dropdown.css({
               position: 'absolute',

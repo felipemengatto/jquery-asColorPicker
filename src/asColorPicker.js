@@ -201,20 +201,10 @@ class AsColorPicker {
     const width = hidden ? this.$trigger.outerWidth() : this.$element.outerWidth() + this.$trigger.outerWidth();
     const pickerWidth = this.$dropdown.outerWidth(true);
     const pickerHeight = this.$dropdown.outerHeight(true);
-    let top;
-    let left;
+    let top = ((offset.top + height ) - (this.$trigger.height()));
+    let left = ((offset.left + width) + (this.$trigger.width()/2));
 
-    if (pickerHeight + offset.top > $(window).height() + $(window).scrollTop()) {
-      top = offset.top - pickerHeight;
-    } else {
-      top = offset.top + height;
-    }
-
-    if (pickerWidth + offset.left > $(window).width() + $(window).scrollLeft()) {
-      left = offset.left - pickerWidth + width;
-    } else {
-      left = offset.left;
-    }
+    this.$dropdown.addClass(`${this.classes.dropdown}-triangle-left`);
 
     this.$dropdown.css({
       position: 'absolute',

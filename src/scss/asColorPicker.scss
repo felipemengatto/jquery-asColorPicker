@@ -1,8 +1,8 @@
 @import url('//fonts.googleapis.com/css?family=Roboto:300,400,700');
 $font-family: 'Roboto' !default;
 $font-weight: 300 !default;
-$trigger-width: 18px !default;
-$trigger-height: 20px !default;
+$trigger-width: 40px !default;
+$trigger-height: 40px !default;
 $saturation-size: 175px !default;
 $hue-alpha-width: 20px !default;
 $hue-alpha-height: 175px !default;
@@ -267,6 +267,19 @@ $inner-border-color: rgba(0, 0, 0, 0.05) !default;
 		[data-mode="palettes"] & {
 			min-width: auto;
 			max-width: auto;
+		}
+
+
+		&-triangle-left::before {
+			border-bottom: 10px solid transparent;
+			border-right: 10px solid #FFF;
+			border-top: 10px solid transparent;
+			content: "";
+			height: 0;
+			left: -8px;
+			position: absolute;
+			top: 15px;
+			width: 0;
 		}
 
 		&.flat-design {

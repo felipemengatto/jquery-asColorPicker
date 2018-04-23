@@ -69,8 +69,8 @@
 }
 
 .asColorPicker-trigger {
-  width: 18px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   background-image: url("../images/transparent.png");
 }
@@ -234,6 +234,17 @@
 [data-mode="palettes"] .asColorPicker-dropdown {
   min-width: auto;
   max-width: auto;
+}
+.asColorPicker-dropdown-triangle-left::before {
+  position: absolute;
+  top: 15px;
+  left: -8px;
+  width: 0; 
+  height: 0;
+  content: "";
+  border-top: 10px solid transparent;
+  border-right: 10px solid #fff;
+  border-bottom: 10px solid transparent;
 }
 .asColorPicker-dropdown.flat-design {
   max-width: 335px;

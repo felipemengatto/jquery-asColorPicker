@@ -3,7 +3,7 @@ export default {
   readonly: false,
   skin: null,
   lang: 'pt-br',
-  hideInput: false,
+  hideInput: true,
   hideFireChange: true,
   keyboard: false,
   color: {
