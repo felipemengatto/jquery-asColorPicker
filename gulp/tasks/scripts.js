@@ -123,7 +123,7 @@ export function concatExternalFiles() {
      return gulp.src([
         'node_modules/jquery-asColor/dist/jquery-asColor.min.js',
         'node_modules/jquery-asGradient/dist/jquery-asGradient.min.js',
-        'dist/jquery-asColorPicker-flat.min.js',
+        'dist/jquery-ascolorpicker-flat.min.js',
       ])
       .pipe(concat('jquery-asColorPicker-flat.min.js'))
       .pipe( gulp.dest('dist'));

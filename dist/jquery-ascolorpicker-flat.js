@@ -1,8 +1,8 @@
 /**
-* asColorPicker v0.4.7
-* https://github.com/amazingSurge/jquery-asColorPicker
+* asColorPicker-flat v0.4.9
+* https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
-* Copyright (c) amazingSurge
+* Copyright (c) undefined
 * Released under the LGPL-3.0 license
 */
 (function(global, factory) {
@@ -19,7 +19,7 @@
       exports: {}
     };
     factory(global.jQuery, global.AsColor, global.AsGradient);
-    global.jqueryAsColorPickerFlatEs = mod.exports;
+    global.jqueryAscolorpickerFlatEs = mod.exports;
   }
 })(this, function(_jquery, _jqueryAsColor, _jqueryAsGradient) {
   'use strict';
@@ -2551,7 +2551,7 @@
   });
 
   var info$1 = {
-    version: '0.4.7'
+    version: '0.4.9'
   };
 
   var NAMESPACE = 'asColorPicker';

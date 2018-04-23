@@ -1,8 +1,8 @@
 /**
-* asColorPicker v0.4.7
-* https://github.com/amazingSurge/jquery-asColorPicker
+* asColorPicker-flat v0.4.9
+* https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
-* Copyright (c) amazingSurge
+* Copyright (c) undefined
 * Released under the LGPL-3.0 license
 */
 import $$1 from 'jquery';
@@ -2160,7 +2160,7 @@ AsColorPicker.setLocalization('pt-br', {
 });
 
 var info$1 = {
-  version:'0.4.7'
+  version:'0.4.9'
 };
 
 const NAMESPACE = 'asColorPicker';
