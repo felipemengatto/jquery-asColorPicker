@@ -1,5 +1,5 @@
 /**
-* asColorPicker-flat v0.4.9
+* asColorPicker-flat v0.4.11
 * https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
 * Copyright (c) undefined
@@ -73,7 +73,7 @@ var MODES = {
     palettes: true,
     saturation: true,
     hue: true,
-    alpha: true,
+    alpha: false,
     buttons: true
   },
   'gradient': {
@@ -2160,7 +2160,7 @@ AsColorPicker.setLocalization('pt-br', {
 });
 
 var info$1 = {
-  version:'0.4.9'
+  version:'0.4.11'
 };
 
 const NAMESPACE = 'asColorPicker';
