@@ -1,5 +1,5 @@
 /**
-* asColorPicker-flat v0.4.13
+* asColorPicker-flat v0.4.14
 * https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
 * Copyright (c) undefined
@@ -994,12 +994,12 @@ var palettes = {
       if ($.inArray(rgba, that.colors) === -1) {
         if (that.colors.length >= that.options.max) {
           that.colors.pop();
-          that.$palettes.find('li').eq(0).remove();
+          that.$palettes.find('li').eq(that.colors.length).remove();
         }
 
         that.colors.unshift(rgba);
 
-        that.$palettes.append(that.options.item(api.namespace, color));
+        that.$palettes.prepend(that.options.item(api.namespace, color));
 
         if (that.options.localStorage) {
           that.setLocal(localKey, that.colors);
@@ -2081,80 +2081,20 @@ AsColorPicker.registerComponent('palettes', palettes);
 AsColorPicker.registerComponent('preview', preview);
 AsColorPicker.registerComponent('gradient', gradient);
 
-// Chinese (cn) localization
-AsColorPicker.setLocalization('cn', {
-  cancelText: "取消",
-  applyText: "应用"
-});
-
-// German (de) localization
-AsColorPicker.setLocalization('de', {
-  cancelText: "Abbrechen",
-  applyText: "Wählen"
-});
-
-// Danish (dk) localization
-AsColorPicker.setLocalization('dk', {
-  cancelText: "annuller",
-  applyText: "Vælg"
-});
-
 // Spanish (es) localization
 AsColorPicker.setLocalization('es', {
   cancelText: "Cancelar",
   applyText: "Elegir"
 });
 
-// Finnish (fi) localization
-AsColorPicker.setLocalization('fi', {
-  cancelText: "Kumoa",
-  applyText: "Valitse"
-});
-
-// French (fr) localization
-AsColorPicker.setLocalization('fr', {
-  cancelText: "Annuler",
-  applyText: "Valider"
-});
-
-// Italian (it) localization
-AsColorPicker.setLocalization('it', {
-  cancelText: "annulla",
-  applyText: "scegli"
-});
-
-// Japanese (ja) localization
-AsColorPicker.setLocalization('ja', {
-  cancelText: "中止",
-  applyText: "選択"
-});
-
-// Russian (ru) localization
-AsColorPicker.setLocalization('ru', {
-  cancelText: "отмена",
-  applyText: "выбрать"
-});
-
-// Swedish (sv) localization
-AsColorPicker.setLocalization('sv', {
-  cancelText: "Avbryt",
-  applyText: "Välj"
-});
-
-// Turkish (tr) localization
-AsColorPicker.setLocalization('tr', {
-  cancelText: "Avbryt",
-  applyText: "Välj"
-});
-
 // Brazil (pt-br) localization
 AsColorPicker.setLocalization('pt-br', {
   cancelText: "Cancelar",
-  applyText: "Concluido"
+  applyText: "Concluído"
 });
 
 var info$1 = {
-  version:'0.4.13'
+  version:'0.4.14'
 };
 
 const NAMESPACE = 'asColorPicker';

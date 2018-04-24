@@ -71,12 +71,12 @@ export default {
       if ($.inArray(rgba, that.colors) === -1) {
         if (that.colors.length >= that.options.max) {
           that.colors.pop();
-          that.$palettes.find('li').eq(0).remove();
+          that.$palettes.find('li').eq(that.colors.length).remove();
         }
 
         that.colors.unshift(rgba);
 
-        that.$palettes.append(that.options.item(api.namespace, color));
+        that.$palettes.prepend(that.options.item(api.namespace, color));
 
         if (that.options.localStorage) {
           that.setLocal(localKey, that.colors);
