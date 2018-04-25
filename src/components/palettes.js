@@ -16,7 +16,7 @@ export default {
     item(namespace, color) {
       return `<li data-color="${color}"><span style="background-color:${color}" /></li>`;
     },
-    colors: ['white', 'black', 'red', 'blue', 'yellow'],
+    colors: ['white'],
     max: 10,
     localStorage: true
   },

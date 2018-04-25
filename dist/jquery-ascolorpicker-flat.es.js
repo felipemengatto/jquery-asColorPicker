@@ -1,5 +1,5 @@
 /**
-* asColorPicker-flat v0.4.14
+* asColorPicker-flat v0.4.15
 * https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
 * Copyright (c) undefined
@@ -939,7 +939,7 @@ var palettes = {
     item(namespace, color) {
       return `<li data-color="${color}"><span style="background-color:${color}" /></li>`;
     },
-    colors: ['white', 'black', 'red', 'blue', 'yellow'],
+    colors: ['white'],
     max: 10,
     localStorage: true
   },
@@ -2094,7 +2094,7 @@ AsColorPicker.setLocalization('pt-br', {
 });
 
 var info$1 = {
-  version:'0.4.14'
+  version:'0.4.15'
 };
 
 const NAMESPACE = 'asColorPicker';

@@ -1,5 +1,5 @@
 /**
-* asColorPicker-flat v0.4.14
+* asColorPicker-flat v0.4.15
 * https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
 * Copyright (c) undefined
@@ -1112,7 +1112,7 @@
         );
       },
 
-      colors: ['white', 'black', 'red', 'blue', 'yellow'],
+      colors: ['white'],
       max: 10,
       localStorage: true
     },
@@ -2484,7 +2484,7 @@
   });
 
   var info$1 = {
-    version: '0.4.14'
+    version: '0.4.15'
   };
 
   var NAMESPACE = 'asColorPicker';
