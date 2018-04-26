@@ -1112,7 +1112,7 @@
         );
       },
 
-      colors: ['white'],
+      colors: ['black', 'white'],
       max: 10,
       localStorage: true
     },

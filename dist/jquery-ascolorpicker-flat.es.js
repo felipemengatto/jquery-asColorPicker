@@ -939,7 +939,7 @@ var palettes = {
     item(namespace, color) {
       return `<li data-color="${color}"><span style="background-color:${color}" /></li>`;
     },
-    colors: ['white'],
+    colors: ['black', 'white'],
     max: 10,
     localStorage: true
   },
