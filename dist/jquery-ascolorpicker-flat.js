@@ -1,5 +1,5 @@
 /**
-* asColorPicker-flat v0.4.16
+* asColorPicker-flat v0.4.17
 * https://github.com/felipemengatto/jquery-asColorPicker-flat
 *
 * Copyright (c) undefined
@@ -1150,8 +1150,6 @@
       $.each(this.colors, function(i, color) {
         list += that.options.item(api.namespace, color);
       });
-
-      console.log(list);
 
       this.$palettes = $(this.options.template.call(this, api.namespace))
         .html(list)
@@ -2489,7 +2487,7 @@
   });
 
   var info$1 = {
-    version: '0.4.16'
+    version: '0.4.17'
   };
 
   var NAMESPACE = 'asColorPicker';
