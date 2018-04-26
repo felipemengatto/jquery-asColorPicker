@@ -965,7 +965,7 @@ var palettes = {
     }
 
     for (const i in colors) {
-      if(Object.hasOwnProperty.call(colors, i)){
+      if(Object.hasOwnProperty.call(colors, i) && typeof colors[i] === 'string'){
         this.colors.unshift(asColor.val(colors[i]).toRGBA());
       }
     }
@@ -974,6 +974,8 @@ var palettes = {
     $.each(this.colors, (i, color) => {
       list += that.options.item(api.namespace, color);
     });
+
+    console.log(list);
 
     this.$palettes = $(this.options.template.call(this, api.namespace)).html(list).appendTo(api.$dropdown);
 

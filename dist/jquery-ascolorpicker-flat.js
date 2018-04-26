@@ -1138,7 +1138,10 @@
       }
 
       for (var i in colors) {
-        if (Object.hasOwnProperty.call(colors, i)) {
+        if (
+          Object.hasOwnProperty.call(colors, i) &&
+          typeof colors[i] === 'string'
+        ) {
           this.colors.unshift(asColor.val(colors[i]).toRGBA());
         }
       }
@@ -1147,6 +1150,8 @@
       $.each(this.colors, function(i, color) {
         list += that.options.item(api.namespace, color);
       });
+
+      console.log(list);
 
       this.$palettes = $(this.options.template.call(this, api.namespace))
         .html(list)
